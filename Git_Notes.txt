@@ -86,3 +86,4 @@ Questions
 Does everything that exists on the master, also exist on branches? No because we can send only a specific file from branch if required
 Even if I have two remote repos, do they both have to come from the one local directory? Don't know but think so as of 06/07/19
 What is going on with FETCH_HEAD?
+Should we set up our remote masters as upstreams/tracks to our local masters?
