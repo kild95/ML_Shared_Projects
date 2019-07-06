@@ -1,0 +1,88 @@
+Github issues and 'remedies'
+
+--------
+Error: "nothing to commit, working tree clean"
+Fix: In bash, cd to master branch (or maybe other branch if necessay)
+run "rm -rf .git" to remove the git directory from your local directory
+run "git init" to reinitialise git directory in local
+
+It may be necessary to force a push from your local i.e. overwrite anything on remote. I don't understand how, but sometimes the remote and local get out of sync.
+To do this use "git push -f origin master"
+
+Instead of git push (whereby you are imposing the local on the remote), you could use git pull or git fetch to pull down the remote files and overwrite the local files. 
+Be careful with git push as it involves 'merging' also. Fetch will pull down files but not overwrite the local file if the same filename exists in remote and local. Push will overwrite local.
+
+https://stackoverflow.com/questions/22067873/troubleshooting-misplaced-git-directory-nothing-to-commit
+--------
+
+For fetching/pulling
+
+1)"git fetch"
+2)usage: git checkout [<options>] <branch>
+   or: git checkout [<options>] [<branch>] -- <file>...
+
+e.g. $ git checkout FETCH_HEAD -- abcd
+---------
+
+Remove from staging i.e. back to working directory
+
+"git rm --cached <file>"
+
+---------
+
+Branching
+
+https://stackoverflow.com/questions/11266478/git-add-remote-branch
+https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+
+---------
+
+Pushing to a branch
+
+git push <remote repo> <localbranch>:<remotebranch>
+e.g. git push origin titanic:titanic 
+
+----------
+
+Pulling from a branch
+
+git pull <remote repo> <remotebranch>:<localbranch>
+e.g. git pull origin titanic:titanic
+
+--------------
+
+To send (in lieu of merge) one file from local branch to local master (not overwrite others)
+
+1) git checkout master
+2) git checkout <branch> <filename> e.g. git checkout titanic titanic.py
+
+--------------
+To pull/fetch (using these terms loosely here) from a remote branch (in this case it was J pulling from K's branch): https://www.git-tower.com/learn/git/faq/checkout-remote-branch
+
+1) git fetch <Kil's url> e.g. git fetch kilorigin . Note: kilorigin had been set up as a remote origin for J
+2) git checkout -- track <Kil's url>/<branch> e.g. git checkout --track kilorigin/titanic
+
+After this, J had a local copy of K's remote titanic branch. Not sure what exactly track does however.
+
+--------------
+
+Points to note
+
+1) WE set up our local titanic branches to track the remote titanic in K's repo using "git checkout --track <repo>/<branch>"
+2) Easy to simply "git pull" or "git push" once in local titanic directory
+3) To just push one file from local branch to local master: 
+i)"git checkout <master>"
+ii) "git checkout <branch> <file>" (tab will work for filename)
+iii) "git commit -m <message>" (it was tracked automatically, i.e. no need to add)
+
+------------
+Useful sites
+
+https://www.atlassian.com/git/tutorials/using-branches/git-checkout
+
+-----------
+Questions
+
+Does everything that exists on the master, also exist on branches? No because we can send only a specific file from branch if required
+Even if I have two remote repos, do they both have to come from the one local directory? Don't know but think so as of 06/07/19
+What is going on with FETCH_HEAD?
